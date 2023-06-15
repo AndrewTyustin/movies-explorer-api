@@ -1,12 +1,12 @@
-const router = require("express").Router();
-const { celebrate, Joi } = require("celebrate");
+const router = require('express').Router();
+const { celebrate, Joi } = require('celebrate');
 
-const { PASSWORD_REGEX } = require("../utils/constants");
+const { PASSWORD_REGEX } = require('../utils/constants');
 
-const { registerUser } = require("../controllers/users");
+const { registerUser } = require('../controllers/users');
 
 router.post(
-  "/signup",
+  '/signup',
   celebrate({
     body: Joi.object().keys({
       email: Joi.string().required().email(),
@@ -14,7 +14,7 @@ router.post(
       name: Joi.string().required().min(2).max(30),
     }),
   }),
-  registerUser
+  registerUser,
 );
 
 module.exports = router;

@@ -1,3 +1,4 @@
+/*eslint linebreak-style: ["error", "windows"]*/
 {
   "env": {
     "commonjs": true,
@@ -16,6 +17,7 @@
     "require"
   ],
   "rules": {
+    "linebreak-style": "off",
     "no-underscore-dangle": [
       "error",
       {
