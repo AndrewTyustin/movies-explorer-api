@@ -1,15 +1,18 @@
 const jwt = require('jsonwebtoken');
 
-const { NODE_ENV, JWT_SECRET } = require('../utils/constants');
+const { NODE_ENV, JWT_SECRET } = require('../utils/config');
 
-const UNAUTHORIZED_ERROR = require('../utils/errors/UnauthorizedError');
+const UNAUTHORIZED_ERROR = require('../utils/errors/UnauthorizedError'); // 401
+const RESPONSE_MESSAGES = require('../utils/constants');
+
+const { unathorized } = RESPONSE_MESSAGES[401].users;
 
 function authorizeUser(req, _, next) {
   const { authorization } = req.headers;
   const bearer = 'Bearer ';
 
   if (!authorization || !authorization.startsWith(bearer)) {
-    return next(new UNAUTHORIZED_ERROR('Неправильные почта или пароль'));
+    return next(new UNAUTHORIZED_ERROR(unathorized));
   }
 
   const token = authorization.replace(bearer, '');
@@ -21,7 +24,7 @@ function authorizeUser(req, _, next) {
       NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
     );
   } catch (err) {
-    return next(new UNAUTHORIZED_ERROR('Неправильные почта или пароль'));
+    return next(new UNAUTHORIZED_ERROR(unathorized));
   }
 
   req.user = payload;

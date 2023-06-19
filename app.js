@@ -14,11 +14,9 @@ const router = require('./routes/index');
 
 const errorHandler = require('./middlewares/errorHandler');
 
-const {
-  MONGODB_URL = 'mongodb://127.0.0.1:27017/bitfilmsdb',
-} = require('./utils/constants');
+const { MONGODB_URL } = require('./utils/config');
 
-const { PORT = 3000 } = process.env;
+const { PORT } = process.env;
 
 const app = express();
 
