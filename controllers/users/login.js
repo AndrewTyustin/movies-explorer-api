@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
@@ -6,7 +7,7 @@ const configDefault = require('../../utils/configDefault');
 const { JWT_SECRET = configDefault.JWT_SECRET } = process.env;
 
 const { User } = require('../../models/user');
-const { UnauthorizedError } = require('../../errors');
+const { UnauthorizedError } = require('../../errors/Index');
 const { ERROR_MESSAGES } = require('../../utils/constants');
 
 async function login(req, res, next) {

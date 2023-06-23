@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const { User } = require('../../models/user');
-const { NotFoundError, ConflictError } = require('../../errors');
+const { NotFoundError, ConflictError } = require('../../errors/Index');
 const { handleMongooseError } = require('../../utils/handleMongooseError');
 const { ERROR_MESSAGES } = require('../../utils/constants');
 

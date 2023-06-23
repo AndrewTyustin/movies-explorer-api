@@ -1,7 +1,6 @@
 const { mongoose } = require('mongoose');
 const { Movie } = require('../../models/movie');
-// eslint-disable-next-line import/no-unresolved
-const { NotFoundError, ForbiddenError } = require('../../errors');
+const { NotFoundError, ForbiddenError } = require('../../errors/Index');
 const { handleMongooseError } = require('../../utils/handleMongooseError');
 const { ERROR_MESSAGES } = require('../../utils/constants');
 

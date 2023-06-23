@@ -3,7 +3,7 @@ const express = require('express');
 
 const { movies } = require('./movies');
 const { users } = require('./users');
-const { NotFoundError } = require('../errors');
+const { NotFoundError } = require('../errors/Index');
 const { auth } = require('../middlewares/auth');
 const { createUser, login } = require('../controllers/users');
 const { createUserValidator, loginValidator } = require('../utils/validators');

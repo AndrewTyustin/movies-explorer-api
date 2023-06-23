@@ -1,7 +1,8 @@
+/* eslint-disable import/no-unresolved */
 const { mongoose } = require('mongoose');
 
 const { Movie } = require('../../models/movie');
-const { ConflictError } = require('../../errors');
+const { ConflictError } = require('../../errors/Index');
 const { handleMongooseError } = require('../../utils/handleMongooseError');
 const { ERROR_MESSAGES } = require('../../utils/constants');
 

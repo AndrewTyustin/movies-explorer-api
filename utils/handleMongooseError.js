@@ -1,4 +1,4 @@
-const { ValidationError } = require('../errors');
+const { ValidationError } = require('../errors/Index');
 const { ERROR_MESSAGES } = require('./constants');
 
 function handleMongooseError(err) {
