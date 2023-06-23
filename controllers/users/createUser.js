@@ -1,8 +1,9 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
 
 const { User } = require('../../models/user');
-const { ConflictError } = require('../../errors');
+const { ConflictError } = require('../../errors/Index');
 const { handleMongooseError } = require('../../utils/handleMongooseError');
 const { ERROR_MESSAGES } = require('../../utils/constants');
 const configDefault = require('../../utils/configDefault');

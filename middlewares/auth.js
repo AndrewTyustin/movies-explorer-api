@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 
-const { UnauthorizedError } = require('../errors');
+// eslint-disable-next-line import/no-unresolved
+const { UnauthorizedError } = require('../errors/Index');
 const { ERROR_MESSAGES } = require('../utils/constants');
 const configDefault = require('../utils/configDefault');
 

@@ -1,5 +1,5 @@
 const { User } = require('../../models/user');
-const { NotFoundError } = require('../../errors');
+const { NotFoundError } = require('../../errors/Index');
 const { ERROR_MESSAGES } = require('../../utils/constants');
 
 async function getUserInfo(req, res, next) {
