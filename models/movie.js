@@ -1,83 +1,74 @@
 const mongoose = require('mongoose');
+const validator = require('validator');
 
-const { Schema } = mongoose;
-const { ObjectId } = Schema.Types;
-
-const { URL_REGEX } = require('../utils/validation');
-
-const movieSchema = new Schema({
-  country: {
-    type: String,
-    required: true,
-  },
-
-  director: {
-    type: String,
-    required: true,
-  },
-
-  duration: {
-    type: Number,
-    required: true,
-  },
-
-  year: {
-    type: String,
-    required: true,
-  },
-
-  description: {
-    type: String,
-    required: true,
-  },
-
-  image: {
-    type: String,
-    required: true,
-    validate: {
-      validator: (url) => URL_REGEX.test(url),
-      message: 'Требуется URL',
+const movieSchema = new mongoose.Schema(
+  {
+    country: {
+      type: String,
+      required: true,
+    },
+    director: {
+      type: String,
+      required: true,
+    },
+    duration: {
+      type: Number,
+      required: true,
+    },
+    year: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+      required: true,
+    },
+    image: {
+      type: String,
+      required: true,
+      validate: {
+        validator: validator.isURL,
+      },
+    },
+    trailerLink: {
+      type: String,
+      required: true,
+      validate: {
+        validator: validator.isURL,
+      },
+    },
+    thumbnail: {
+      type: String,
+      required: true,
+      validate: {
+        validator: validator.isURL,
+      },
+    },
+    nameRU: {
+      type: String,
+      required: true,
+    },
+    nameEN: {
+      type: String,
+      required: true,
+    },
+    movieId: {
+      type: Number,
+      required: true,
+    },
+    owner: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'user',
+      required: true,
     },
   },
-
-  trailerLink: {
-    type: String,
-    required: true,
-    validate: {
-      validator: (url) => URL_REGEX.test(url),
-      message: 'Требуется URL',
-    },
+  {
+    versionKey: false,
   },
+);
 
-  thumbnail: {
-    type: String,
-    required: true,
-    validate: {
-      validator: (url) => URL_REGEX.test(url),
-      message: 'Требуется URL',
-    },
-  },
+movieSchema.index({ owner: 1, movieId: 1 }, { unique: true });
 
-  owner: {
-    type: ObjectId,
-    ref: 'user',
-    required: true,
-  },
+const Movie = mongoose.model('movie', movieSchema);
 
-  movieId: {
-    type: Number,
-    required: true,
-  },
-
-  nameRU: {
-    type: String,
-    required: true,
-  },
-
-  nameEN: {
-    type: String,
-    required: true,
-  },
-});
-
-module.exports = mongoose.model('movie', movieSchema);
+module.exports = { Movie };

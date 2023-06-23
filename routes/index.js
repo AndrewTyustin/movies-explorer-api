@@ -1,23 +1,28 @@
-const router = require('express').Router();
+/* eslint-disable import/no-unresolved */
+const express = require('express');
 
-const routeSignup = require('./signup');
-const routeSignin = require('./signin');
+const { movies } = require('./movies');
+const { users } = require('./users');
+const { NotFoundError } = require('../errors');
+const { auth } = require('../middlewares/auth');
+const { createUser, login } = require('../controllers/users');
+const { createUserValidator, loginValidator } = require('../utils/validators');
+const { ERROR_MESSAGES } = require('../utils/constants');
 
-const auth = require('../middlewares/auth');
+const routes = express.Router();
 
-const routeUsers = require('./users');
-const routeMovies = require('./movies');
+routes.all('*', express.json());
 
-const NOT_FOUND_ERROR = require('../utils/errors/NotFoundError');
+routes.post('/signup', createUserValidator, createUser);
+routes.post('/signin', loginValidator, login);
 
-router.use('/', routeSignup);
-router.use('/', routeSignin);
+routes.all('*', auth);
 
-router.use(auth);
+routes.use('/users', users);
+routes.use('/movies', movies);
 
-router.use('/users', routeUsers);
-router.use('/movies', routeMovies);
+routes.all('*', (req, res, next) => {
+  next(new NotFoundError(ERROR_MESSAGES.PAGE_NOT_FOUND));
+});
 
-router.use((req, res, next) => next(new NOT_FOUND_ERROR('Страницы по запрошенному URL не существует')));
-
-module.exports = router;
+module.exports = { routes };

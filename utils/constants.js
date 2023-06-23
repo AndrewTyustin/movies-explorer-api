@@ -1,62 +1,26 @@
-const RESPONSE_MESSAGES = {
-  200: {
-    movies: {
-      deletionFavourite: 'Фильм успешно удален из личного кабинета пользователя',
-    },
-  },
-
-  201: {
-    users: {
-      registrationSuccess: 'Пользователь успешно зарегистрирован на сайте',
-    },
-
-    movies: {
-      addingFavourite: 'Фильм успешно сохранен в личном кабинете пользователя',
-    },
-  },
-
-  400: {
-    users: {
-      cast: 'Передан некорректный id пользователя',
-      passwordRequirements: 'Пароль должен состоять минимум из 8 симв., включать 1 букву латиницы, цифру и спецсимвол',
-      validationRegistration: 'Переданы некорректные данные при регистрации пользователя',
-      validationUpdate: 'Переданы некорректные данные при обновлении данных профиля пользователя',
-    },
-
-    movies: {
-      validationSaving: 'Переданы некорректные данные при сохранении фильма в личном кабинете пользователя',
-    },
-  },
-
-  401: {
-    users: {
-      unathorized: 'Неправильный пароль',
-    },
-  },
-
-  403: {
-    movies: {
-      accessRightsDeletion: 'Нет прав доступа для удаления фильма из личного кабинета другого пользователя',
-    },
-  },
-
-  404: {
-    users: {
-      idNotFound: 'Пользователь с таким id не найден',
-      emailRegistration: 'Пользователь с такой почтой не зарегистрирован',
-    },
-
-    movies: {
-      userIdNotFound: 'Данные фильмов пользователя с указанным id не найдены',
-      dataNotFound: 'Данные фильма по указанному id не найдены',
-    },
-  },
-
-  409: {
-    users: {
-      emailDuplication: 'Пользователь с таким email уже существует',
-    },
-  },
+const STATUS_CODES = {
+  CONFLICT: 409,
+  FORBIDDEN: 403,
+  NOT_FOUND: 404,
+  UNAUTHORIZED: 401,
+  BAD_REQUEST: 400,
+  INTERNAL_SERVER_ERROR: 500,
 };
 
-module.exports = RESPONSE_MESSAGES;
+const ERROR_MESSAGES = {
+  USER_CONFLICT: 'Пользователь с таким email уже существует',
+  MOVIE_CONFLICT: 'Фильм с таким id уже существует',
+  FORBIDDEN: 'Нет прав для выполнения действия',
+  USER_NOT_FOUND: 'Пользователь не найден',
+  MOVIE_NOT_FOUND: 'Фильм не найден',
+  PAGE_NOT_FOUND: 'Неверный адрес запроса',
+  WRONG_CREDENTIALS: 'Неверные данные для входа',
+  UNAUTHORIZED: 'Для обработки запроса необходима авторизация',
+  WRONG_DATA_AT_FIELD: 'Неверные данные в поле',
+  UNKNOWN_ERROR: 'Что-то пошло не так',
+};
+
+module.exports = {
+  STATUS_CODES,
+  ERROR_MESSAGES,
+};
